@@ -104,3 +104,12 @@ venv.bak/
 
 # mypy
 .mypy_cache/
+
+.DS_Store
+.idea/
+scan/.DS_Store
+scan/static/.DS_Store
+scan/static/img/.DS_Store
+scan/templates/.DS_Store
+static/.DS_Store
+static/favicon.ico

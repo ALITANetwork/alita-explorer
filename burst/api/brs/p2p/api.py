@@ -9,7 +9,7 @@ from burst.api.brs.p2p import queries
 class P2PApi(BrsApiBase):
     """ The P2PApi class provides convenient access to P2P API.
     """
-    headers = {'User-Agent': 'BRS/{}'.format(settings.BRS_P2P_VERSION)}
+    headers = {'User-Agent': 'RTC/{}'.format(settings.BRS_P2P_VERSION)}
     _default_port = settings.DEFAULT_P2P_PORT
 
     def get_peers(self) -> list:

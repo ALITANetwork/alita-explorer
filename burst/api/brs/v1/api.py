@@ -15,7 +15,7 @@ from burst.api.brs.v1 import queries
 
 
 class BrsApiBase:
-    endpoint = 'burst'
+    endpoint = 'raptor'
     headers = None
     _default_port = settings.DEFAULT_API_V1_PORT
     _session = None

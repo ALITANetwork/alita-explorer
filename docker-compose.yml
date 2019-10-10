@@ -7,7 +7,7 @@ services:
     stdin_open: true
     tty: true
     ports:
-      - "5000:5000"
+      - "8301:8301"
     volumes:
       - .:/app
     environment:

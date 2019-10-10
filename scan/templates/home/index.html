@@ -15,7 +15,7 @@ Network Difficult: {% if blocks %}{%  with blocks|first as last_block %}{{ last_
     <div class="card mb-4 shadow-sm bg-primary">
       <div class="card-body">
         <form class="form-inline input-group" action="{% url 'search' %}">
-          <input class="form-control" type="text" name="q" placeholder="Search by Address / Block / Transaction / Asset / Marketplace / AT / Peer" aria-label="Search">
+          <input class="form-control" type="text" name="q" placeholder="Search by Address / Block / Transaction / Peer" aria-label="Search">
           <div class="input-group-append">
             <button class="btn btn-primary" type="submit" name="submit" value="Search">Search</button>
           </div>
@@ -31,47 +31,31 @@ Network Difficult: {% if blocks %}{%  with blocks|first as last_block %}{{ last_
         <div class="row mx-gutters-md-1">
           <div class="col-md-6 col-lg-4 u-ver-divider u-ver-divider--none-md">
             <div class="media align-items-center">
-              <div class="text-left">
-                <h6 class="text-uppercase text-secondary mb-0">Burst price</h6>
-                <span class="text-info small">
-                  ${{ burst_info.exchange.price_usd|rounding:4|intcomma }} ({{ burst_info.exchange.percent_change_24h|stringformat:"+d" }}%) @ {{ burst_info.exchange.price_btc }} BTC
-                </span>
-              </div>
-            </div>
-            <hr class="hr-space-lg">
-            <div class="media align-items-center">
-              <div class="text-left">
-                <h6 class="text-uppercase text-secondary mb-0">Market cap</h6>
-                <span class="text-info small">${{ burst_info.exchange.market_cap_usd|floatformat:0|intcomma }}</span>
-              </div>
+                <div class="text-left">
+                    <h6 class="text-uppercase text-secondary mb-0">Latest block</h6>
+                    {% if blocks %}
+                        {%  with blocks|first as last_block %}
+                            <span class="text-info small">{{ last_block.height }}</span>
+                        {% endwith %}
+                    {% else %}
+                        -
+                    {% endif %}
+                </div>
             </div>
           </div>
 
           <div class="col-md-6 col-lg-4 u-ver-divider u-ver-divider--none-lg">
             <div class="media align-items-center">
-              <div class="text-left">
-                <h6 class="text-uppercase text-secondary mb-0">Latest block</h6>
-                {% if blocks %}
-                  {%  with blocks|first as last_block %}
-                    <span class="text-info small">{{ last_block.height }}</span>
-                  {% endwith %}
-                {% else %}
-                  -
-                {% endif %}
-              </div>
-            </div>
-            <hr class="hr-space-lg">
-            <div class="media align-items-center">
-              <div class="text-left">
-                <h6 class="text-uppercase text-secondary mb-0">Network Difficult</h6>
-                {% if blocks %}
-                  {%  with blocks|first as last_block %}
-                    <span class="text-info small">{{ last_block.base_target|net_diff|floatformat:2|intcomma }} TB</span>
-                  {% endwith %}
-                {% else %}
-                  -
-                {% endif %}
-              </div>
+                <div class="text-left">
+                    <h6 class="text-uppercase text-secondary mb-0">Network Difficult</h6>
+                    {% if blocks %}
+                        {%  with blocks|first as last_block %}
+                            <span class="text-info small">{{ last_block.base_target|net_diff|floatformat:2|intcomma }} TB</span>
+                        {% endwith %}
+                    {% else %}
+                        -
+                    {% endif %}
+                </div>
             </div>
           </div>
         </div>

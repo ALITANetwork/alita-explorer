@@ -26,7 +26,7 @@ fi
 if [[ "$START_SERVER" = "on" ]]; then
     echo "Starting CMD"
     if [[ "$APP_ENV" = "DEV" ]]; then
-        export DJANGO_SERVER_APP="python manage.py runserver 0.0.0.0:5000"
+        export DJANGO_SERVER_APP="python manage.py runserver 0.0.0.0:8301"
     elif [[ "$APP_ENV" = "PROD" ]]; then
         export DJANGO_SERVER_APP="/usr/local/bin/uwsgi --ini /app/wsgi.ini"
     else

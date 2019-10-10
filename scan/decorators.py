@@ -11,8 +11,7 @@ def lock_decorator(key=None, expire=None, ident=None, auto_renewal=False):
         @wraps(func)
         def inner(*args, **kwargs):
             lock_key = _make_lock_key()
-            with cache.lock(lock_key, expire, ident, auto_renewal):
-                return func(*args, **kwargs)
+            return func(*args, **kwargs)
 
         return inner
 

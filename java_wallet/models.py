@@ -3,7 +3,7 @@
 #   * Rearrange models' order
 #   * Make sure each model has one field with primary_key=True
 #   * Make sure each ForeignKey has `on_delete` set to the desired behavior.
-#   * Remove `managed = True` lines if you wish to allow Django to create, modify, and delete the table
+#   * Remove `managed = False` lines if you wish to allow Django to create, modify, and delete the table
 # Feel free to rename the models, but don't rename db_table values or field names.
 from django.db import models
 from .fields import PositiveBigIntegerField, TimestampField
@@ -24,7 +24,7 @@ class Account(models.Model):
     latest = models.IntegerField()
 
     class Meta:
-        managed = True
+        managed = False
         db_table = 'account'
         unique_together = (('id', 'height'),)
 
@@ -39,7 +39,7 @@ class AccountAsset(models.Model):
     latest = models.IntegerField()
 
     class Meta:
-        managed = True
+        managed = False
         db_table = 'account_asset'
         unique_together = (('account_id', 'asset_id', 'height'),)
 
@@ -51,12 +51,12 @@ class Alias(models.Model):
     alias_name = models.CharField(max_length=100)
     alias_name_lower = models.CharField(max_length=100)
     alias_uri = models.TextField()
-    timestamp = TimestampField()
+    timestamp = models.DateTimeField()
     height = models.IntegerField()
     latest = models.IntegerField()
 
     class Meta:
-        managed = True
+        managed = False
         db_table = 'alias'
         unique_together = (('id', 'height'),)
 
@@ -70,7 +70,7 @@ class AliasOffer(models.Model):
     latest = models.IntegerField()
 
     class Meta:
-        managed = True
+        managed = False
         db_table = 'alias_offer'
         unique_together = (('id', 'height'),)
 
@@ -87,7 +87,7 @@ class AskOrder(models.Model):
     latest = models.IntegerField()
 
     class Meta:
-        managed = True
+        managed = False
         db_table = 'ask_order'
         unique_together = (('id', 'height'),)
 
@@ -103,7 +103,7 @@ class Asset(models.Model):
     height = models.IntegerField()
 
     class Meta:
-        managed = True
+        managed = False
         db_table = 'asset'
 
 
@@ -114,11 +114,11 @@ class AssetTransfer(models.Model):
     sender_id = PositiveBigIntegerField()
     recipient_id = PositiveBigIntegerField()
     quantity = PositiveBigIntegerField()
-    timestamp = TimestampField()
+    timestamp = models.DateTimeField()
     height = models.IntegerField()
 
     class Meta:
-        managed = True
+        managed = False
         db_table = 'asset_transfer'
 
 
@@ -139,7 +139,7 @@ class At(models.Model):
     latest = models.IntegerField()
 
     class Meta:
-        managed = True
+        managed = False
         db_table = 'at'
         unique_together = (('id', 'height'),)
 
@@ -158,7 +158,7 @@ class AtState(models.Model):
     latest = models.IntegerField()
 
     class Meta:
-        managed = True
+        managed = False
         db_table = 'at_state'
         unique_together = (('at_id', 'height'),)
 
@@ -175,7 +175,7 @@ class BidOrder(models.Model):
     latest = models.IntegerField()
 
     class Meta:
-        managed = True
+        managed = False
         db_table = 'bid_order'
         unique_together = (('id', 'height'),)
 
@@ -184,8 +184,7 @@ class Block(models.Model):
     db_id = models.BigAutoField(primary_key=True)
     id = PositiveBigIntegerField(unique=True)
     version = models.IntegerField()
-    timestamp = TimestampField(unique=True)
-    previous_block = models.ForeignKey('self', models.DO_NOTHING, blank=True, null=True, related_name='previous_block_r', to_field='id')
+    timestamp = models.DateTimeField(unique=True)
     total_amount = PositiveBigIntegerField()
     total_fee = PositiveBigIntegerField()
     payload_length = models.IntegerField()
@@ -193,18 +192,31 @@ class Block(models.Model):
     previous_block_hash = models.CharField(max_length=32, blank=True, null=True)
     cumulative_difficulty = models.TextField()
     base_target = PositiveBigIntegerField()
-    next_block = models.ForeignKey('self', models.DO_NOTHING, blank=True, null=True, related_name='next_block_r', to_field='id')
     height = models.IntegerField(unique=True)
-    generation_signature = models.BinaryField(max_length=64)
+    generation_signature = models.TextField()
+    print("Block--:")
+    print(generation_signature)
     block_signature = models.CharField(max_length=64)
     payload_hash = models.CharField(max_length=32)
     generator_id = PositiveBigIntegerField()
     nonce = PositiveBigIntegerField()
     ats = models.TextField(blank=True, null=True)
+    next_block = models.ForeignKey('self', models.DO_NOTHING, blank=True, null=True, related_name='next_block_r', to_field='id')
+    previous_block = models.ForeignKey('self', models.DO_NOTHING, blank=True, null=True, related_name='previous_block_r', to_field='id')
 
     class Meta:
-        managed = True
+        managed = False
         db_table = 'block'
+
+
+class DjangoMigrations(models.Model):
+    app = models.CharField(max_length=255)
+    name = models.CharField(max_length=255)
+    applied = models.DateTimeField()
+
+    class Meta:
+        managed = False
+        db_table = 'django_migrations'
 
 
 class Escrow(models.Model):
@@ -220,7 +232,7 @@ class Escrow(models.Model):
     latest = models.IntegerField()
 
     class Meta:
-        managed = True
+        managed = False
         db_table = 'escrow'
         unique_together = (('id', 'height'),)
 
@@ -234,7 +246,7 @@ class EscrowDecision(models.Model):
     latest = models.IntegerField()
 
     class Meta:
-        managed = True
+        managed = False
         db_table = 'escrow_decision'
         unique_together = (('escrow_id', 'account_id', 'height'),)
 
@@ -246,7 +258,7 @@ class Goods(models.Model):
     name = models.CharField(max_length=100)
     description = models.TextField(blank=True, null=True)
     tags = models.CharField(max_length=100, blank=True, null=True)
-    timestamp = TimestampField()
+    timestamp = models.DateTimeField()
     quantity = models.IntegerField()
     price = PositiveBigIntegerField()
     delisted = models.IntegerField()
@@ -254,7 +266,7 @@ class Goods(models.Model):
     latest = models.IntegerField()
 
     class Meta:
-        managed = True
+        managed = False
         db_table = 'goods'
         unique_together = (('id', 'height'),)
 
@@ -263,7 +275,7 @@ class Peer(models.Model):
     address = models.CharField(primary_key=True, max_length=100)
 
     class Meta:
-        managed = True
+        managed = False
         db_table = 'peer'
 
 
@@ -278,7 +290,7 @@ class Purchase(models.Model):
     deadline = models.IntegerField()
     note = models.TextField(blank=True, null=True)
     nonce = models.CharField(max_length=32, blank=True, null=True)
-    timestamp = TimestampField()
+    timestamp = models.DateTimeField()
     pending = models.IntegerField()
     goods = models.TextField(blank=True, null=True)
     goods_nonce = models.CharField(max_length=32, blank=True, null=True)
@@ -292,7 +304,7 @@ class Purchase(models.Model):
     latest = models.IntegerField()
 
     class Meta:
-        managed = True
+        managed = False
         db_table = 'purchase'
         unique_together = (('id', 'height'),)
 
@@ -306,7 +318,7 @@ class PurchaseFeedback(models.Model):
     latest = models.IntegerField()
 
     class Meta:
-        managed = True
+        managed = False
         db_table = 'purchase_feedback'
 
 
@@ -318,7 +330,7 @@ class PurchasePublicFeedback(models.Model):
     latest = models.IntegerField()
 
     class Meta:
-        managed = True
+        managed = False
         db_table = 'purchase_public_feedback'
 
 
@@ -332,7 +344,7 @@ class RewardRecipAssign(models.Model):
     latest = models.IntegerField()
 
     class Meta:
-        managed = True
+        managed = False
         db_table = 'reward_recip_assign'
         unique_together = (('account_id', 'height'),)
 
@@ -349,7 +361,7 @@ class Subscription(models.Model):
     latest = models.IntegerField()
 
     class Meta:
-        managed = True
+        managed = False
         db_table = 'subscription'
         unique_together = (('id', 'height'),)
 
@@ -366,11 +378,11 @@ class Trade(models.Model):
     buyer_id = PositiveBigIntegerField()
     quantity = PositiveBigIntegerField()
     price = PositiveBigIntegerField()
-    timestamp = TimestampField()
+    timestamp = models.DateTimeField()
     height = models.IntegerField()
 
     class Meta:
-        managed = True
+        managed = False
         db_table = 'trade'
         unique_together = (('ask_order_id', 'bid_order_id'),)
 
@@ -384,13 +396,12 @@ class Transaction(models.Model):
     amount = PositiveBigIntegerField()
     fee = PositiveBigIntegerField()
     height = models.IntegerField()
-    block = models.ForeignKey(Block, models.DO_NOTHING, to_field='id')
     signature = models.CharField(max_length=64, blank=True, null=True)
-    timestamp = TimestampField()
+    timestamp = models.DateTimeField()
     type = models.IntegerField()
     subtype = models.IntegerField()
     sender_id = PositiveBigIntegerField()
-    block_timestamp = TimestampField()
+    block_timestamp = models.DateTimeField()
     full_hash = models.CharField(unique=True, max_length=32)
     referenced_transaction_fullhash = models.CharField(max_length=32, blank=True, null=True)
     attachment_bytes = models.TextField(blank=True, null=True)
@@ -401,9 +412,10 @@ class Transaction(models.Model):
     ec_block_height = models.IntegerField(blank=True, null=True)
     ec_block_id = PositiveBigIntegerField(blank=True, null=True)
     has_encrypttoself_message = models.IntegerField()
+    block = models.ForeignKey(Block, models.DO_NOTHING, to_field='id')
 
     class Meta:
-        managed = True
+        managed = False
         db_table = 'transaction'
 
 
@@ -413,12 +425,12 @@ class UnconfirmedTransaction(models.Model):
     expiration = models.IntegerField()
     transaction_height = models.IntegerField()
     fee_per_byte = PositiveBigIntegerField()
-    timestamp = TimestampField()
+    timestamp = models.DateTimeField()
     transaction_bytes = models.TextField()
     height = models.IntegerField()
 
     class Meta:
-        managed = True
+        managed = False
         db_table = 'unconfirmed_transaction'
 
 
@@ -426,5 +438,5 @@ class Version(models.Model):
     next_update = models.IntegerField()
 
     class Meta:
-        managed = True
+        managed = False
         db_table = 'version'

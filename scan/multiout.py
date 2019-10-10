@@ -125,7 +125,7 @@ def aggregate_greater_height(height: int) -> None:
 @transaction.atomic
 def aggregate_cmd():
     logger.info('Start')
-
+    print('Start-Scan blocks')
     last_block = Block.objects.using('java_wallet').values(
         'height', 'block_signature'
     ).order_by('-height').first()
@@ -171,7 +171,7 @@ def aggregate_cmd():
         height = 0
 
     logger.info('Aggregating from height: %d', height)
-
+    '''
     aggregate_greater_height(height)
-
+    '''
     logger.info('Aggregation finished')

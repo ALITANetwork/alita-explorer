@@ -6,7 +6,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
     <meta name="description" content="{% block description %}{% endblock %}">
     <meta name="author" content="Lev Lybin">
-    <title>BurstCoin {% if test_net %}TestNet {% endif %}Blockchain Explorer{% block title %}{% endblock %}</title>
+    <title>RAPTOR {% if test_net %}TestNet {% endif %}RAPTOR Explorer{% block title %}{% endblock %}</title>
     <link href="{% static 'favicon.ico' %}" rel="icon">
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
     <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.8.2/css/all.css" integrity="sha384-oS3vJWv+0UjzBfQzYUhtDYW+Pj2yciDJxpsK1OYPAYjqT085Qq/1cq5FLXAZQ7Ay" crossorigin="anonymous">
@@ -38,18 +38,7 @@
                 <a class="nav-link" href="{% url 'blocks' %}">Blocks</a>
               </li>
               <li class="nav-item dropdown">
-                <a class="nav-link dropdown-toggle" href="#" id="transactions-nav" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Transactions</a>
-                <div class="dropdown-menu" aria-labelledby="transactions-nav">
-                  <a class="dropdown-item" href="{% url 'txs' %}">Transactions</a>
-                  <a class="dropdown-item" href="{% url 'mos' %}">MultiOut</a>
-                  <a class="dropdown-item" href="{% url 'ats' %}">ATs</a>
-                </div>
-              </li>
-              <li class="nav-item">
-                <a class="nav-link" href="{% url 'assets' %}">Assets</a>
-              </li>
-              <li class="nav-item">
-                <a class="nav-link" href="{% url 'mps' %}">Marketplace</a>
+                <a class="nav-link text-nowrap" href="{% url 'txs' %}">Transactions</a>
               </li>
               <li class="nav-item">
                 <a class="nav-link text-nowrap" href="{% url 'accounts' %}">Top Accounts</a>
@@ -64,17 +53,6 @@
               <li class="nav-item dropdown">
                 <a class="nav-link dropdown-toggle" href="#" id="more-nav" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">More</a>
                 <div class="dropdown-menu" aria-labelledby="more-nav">
-                  <a class="dropdown-item" href="https://burst-coin.org" target="_blank">Burstcoin Site</a>
-                  <a class="dropdown-item" href="https://burstforum.net" target="_blank">Burstcoin Forum</a>
-                  <a class="dropdown-item" href="https://burstcoin.ist" target="_blank">Burstcoin News</a>
-                  <a class="dropdown-item" href="https://www.reddit.com/r/burstcoin/" target="_blank">Burstcoin Reddit</a>
-                  <a class="dropdown-item" href="https://github.com/burst-apps-team/" target="_blank">Burstcoin Github</a>
-                  <a class="dropdown-item" href="https://github.com/llybin/burst_explorer" target="_blank">Explorer Github</a>
-                  <div class="dropdown-divider"></div>
-                  <a class="dropdown-item" href="https://discord.gg/G8N2QPa" target="_blank">Discord Community</a>
-                  <a class="dropdown-item" href="https://t.me/burstcoin" target="_blank">Telegram Community</a>
-                  <div class="dropdown-divider"></div>
-                  <a class="dropdown-item" href="https://telegram.me/ExchangeRatesBot" target="_blank">Telegram ExchangeRatesBot</a>
                   <div class="dropdown-divider"></div>
                   <a class="dropdown-item" href="{{ wallet_url }}" target="_blank">Online {% if test_net %}TestNet {% endif %}Wallet</a>
                 </div>
@@ -84,7 +62,7 @@
 
           {% if request.path != '/' %}
           <form class="form-inline my-2 my-lg-0 input-group col-lg-3" action="{% url 'search' %}">
-            <input class="form-control mr-sm-2" type="text" name="q" placeholder="Search by Address / Block / Transaction / Asset / Marketplace / AT / Peer" title="Search by Address / Block / Transaction / Asset / Marketplace / AT / Peer" aria-label="Search">
+            <input class="form-control mr-sm-2" type="text" name="q" placeholder="Search by Address / Block / Transaction / Peer" title="Search by Address / Block / Transaction / Peer" aria-label="Search">
             <button class="btn btn-outline-primary my-sm-0" type="submit" name="submit" value="Search">Search</button>
           </form>
           {% else %}
@@ -111,12 +89,11 @@
 
     <footer class="footer mt-auto py-3">
       <div class="container text-center">
-        Developed by <a href="https://github.com/llybin/burst_explorer" target="_blank">Lev Lybin</a>
+        Developed by <a href="/" target="_blank">RAPTOR CHAIN</a>
         <br>
         {% if not test_net %}
           Donations:
-          <a href="{% url 'address-detail' 11834991772770337952 %}">BURST-D372-C2DU-HMKK-CQLHA</a> |
-          <a href="{% url 'asset-detail' 14686983107863035136 %}">BurstScan ❤️ Asset</a>
+          <a href="{% url 'address-detail' 2761210303826197932 %}">RAPTOR-CZFE-6K8V-JMTF-4CGNE</a>
         {% endif %}
         <br>
       </div>

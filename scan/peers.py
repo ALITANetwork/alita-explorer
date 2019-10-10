@@ -87,6 +87,8 @@ def get_last_cumulative_difficulty() -> dict:
         'height', 'cumulative_difficulty'
     ).first()
 
+    print("Debug-:")
+
     result['cumulative_difficulty'] = str(int(result['cumulative_difficulty'].hex(), 16))
 
     return result
@@ -181,7 +183,9 @@ def get_nodes_list() -> list:
 
 def get_state(update: dict, peer_obj: PeerMonitor or None) -> int:
     _data = get_last_cumulative_difficulty()
-
+    print("Debug--:")
+    print(_data)
+    '''
     if update['height'] == _data['height']:
         if update['cumulative_difficulty'] == _data['cumulative_difficulty']:
             state = PeerMonitor.State.ONLINE
@@ -198,8 +202,8 @@ def get_state(update: dict, peer_obj: PeerMonitor or None) -> int:
                 state = PeerMonitor.State.SYNC
             else:
                 state = PeerMonitor.State.FORKED
-
-    return state
+    '''
+    return PeerMonitor.State.ONLINE
 
 
 def get_count_nodes_online() -> int:

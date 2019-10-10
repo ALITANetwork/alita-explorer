@@ -6,7 +6,7 @@
     <tbody>
     {% for tx in txs_pending %}
       <tr>
-        <td class="text-nowrap">{{ tx.timestamp|naturaltime }}</td>
+        <td class="text-nowrap">{{ tx.sender }}</td>
         <td>{{ tx.tx_name }}</td>
         <td class="text-nowrap">
           {% include "account_link.html" with account_id=tx.sender account_name=tx.sender_name %}
@@ -38,8 +38,8 @@
             {{ tx.tx_name }}
           {% endif %}
         </td>
-        <td class="text-nowrap" title="Amount">{{ tx.amountNQT|burst_amount|rounding:4|intcomma }} Burst</td>
-        <td class="text-nowrap" title="Fee">{{ tx.feeNQT|burst_amount|rounding:4|intcomma }} Burst</td>
+        <td class="text-nowrap" title="Amount">{{ tx.amountNQT|burst_amount|rounding:4|intcomma }} Raptor</td>
+        <td class="text-nowrap" title="Fee">{{ tx.feeNQT|burst_amount|rounding:4|intcomma }} Raptor</td>
       </tr>
     {% empty %}
       <div class="text-secondary" style="display: flex;flex-direction: column;justify-content: center;height: 90%;">

@@ -13,12 +13,13 @@ class MultiOutPack:
         headers = struct.unpack("2c", data)
 
         version = int.from_bytes(headers[0], byteorder=sys.byteorder)
+        '''
         if version != 1:
             logging.warning("Unknown multiout version: %d, data: %r", version, data)
             raise UnpackError
-
+        '''
         nums = int.from_bytes(headers[1], byteorder=sys.byteorder)
-
+        logging.error("-----nums", nums)
         return version, nums
 
     def unpack_header(self, data: bytes) -> (int, int):

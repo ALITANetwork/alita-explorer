@@ -8,13 +8,38 @@ from burst.libs.transactions import get_message
 from java_wallet.fields import get_desc_tx_type
 from java_wallet.models import Block, Transaction
 from scan.helpers import get_exchange_info
+from decimal import Decimal
+import math
 
 register = template.Library()
 
 
+def get_vary_rule(once: float, slow: int, month: int) -> float:
+    ONE_RAPTOR = 100000000
+    return float(Decimal(once) * Decimal(ONE_RAPTOR) * Decimal(math.pow(Decimal(slow), month)) / Decimal(
+        math.pow(Decimal(100), month)) / Decimal(ONE_RAPTOR))
+
+
+def middle_rule(once: float, slow: int, month: int) -> float:
+    return (Decimal(once) * Decimal(math.pow(Decimal(slow), month))) / (Decimal(math.pow(Decimal(100), month)))
+
+
 def get_block_reward(block: Block) -> int:
-    month = int(block.height / 10800)
-    return int(pow(0.95, month) * 10000)
+    if block.height == 0 or block.height > 2759400:
+        return 0
+    month = int((block.height - 1) / 13140)
+    slow = 100
+    if 0 < block.height <= 13140 * 2:
+        month = 0
+    elif 2 <= month <= 104:
+        month -= 1
+        slow = 98
+    else:
+        month = month - 104
+        slow = 99
+        return int(get_vary_rule(middle_rule(1293.8, 98, 103), slow, month))
+
+    return int(get_vary_rule(1293.8, slow, month))
 
 
 @register.filter

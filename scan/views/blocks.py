@@ -24,7 +24,7 @@ def fill_data_block(obj):
 class BlockListView(ListView):
     model = Block
     queryset = Block.objects.using('java_wallet').all()
-    template_name = 'blocks/list.html'
+    template_name = 'blocks/blocks.html'
     context_object_name = 'blocks'
     paginator_class = CachingPaginator
     paginate_by = 25

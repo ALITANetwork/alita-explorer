@@ -57,4 +57,4 @@ def search_view(request):
     if redirect_url:
         return redirect(redirect_url)
     else:
-        return render(request, 'base.html', {'submit': 'Search'})
+        return render(request, 'alita-base.html', {'submit': 'Search'})

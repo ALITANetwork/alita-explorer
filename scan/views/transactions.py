@@ -23,7 +23,7 @@ def fill_data_transaction(obj, list_page=True):
 class TxListView(ListView):
     model = Transaction
     queryset = Transaction.objects.using('java_wallet').all()
-    template_name = 'txs/list.html'
+    template_name = 'txs/transactions.html'
     context_object_name = 'txs'
     paginator_class = CachingPaginator
     paginate_by = 25

@@ -1,3 +1,5 @@
+import json
+
 from django.db.models import Count
 from django.shortcuts import render
 from django.views.decorators.http import require_http_methods
@@ -24,6 +26,13 @@ def peers_charts_view(request):
         state['state'] = PeerMonitor(state=state['state']).get_state_display()
 
     last_check = PeerMonitor.objects.values('modified_at').order_by('-modified_at').first()
+
+    online_peers_data = {}
+    for country in countries:
+        key = str(country['country_code']).lower()
+        online_peers_data[key] = country['cnt']
+
+    print(json.dumps(online_peers_data))
 
     return render(
         request,

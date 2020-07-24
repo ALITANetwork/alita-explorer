@@ -10,6 +10,7 @@ class UnpackError(Exception):
 class MultiOutPack:
     @staticmethod
     def _unpack_header(data: bytes) -> (int, int):
+        """b_data = bytes(data, encoding = "utf8")"""
         headers = struct.unpack("2c", data)
 
         version = int.from_bytes(headers[0], byteorder=sys.byteorder)

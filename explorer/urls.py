@@ -18,6 +18,7 @@ from django.conf import settings
 from django.conf.urls.static import static
 from django.urls import path, include
 
+from scan.views.compute import compute_pool_cloud
 from scan.views.index import index
 from scan.views.accounts import AccountsListView, AddressDetailView
 from scan.views.blocks import BlockListView, BlockDetailView
@@ -26,12 +27,12 @@ from scan.views.ats import AtListView, AtDetailView
 from scan.views.transactions import TxListView, TxDetailView
 from scan.views.multiout import MultiOutListView
 from scan.views.search import search_view
-from scan.views.marketplace import MarketPlaceListView, MarketPlaceDetailView, MarketPlacePurchasesListView
+from scan.views.marketplace import MarketPlaceListView, MarketPlaceDetailView, MarketPlacePurchasesListView, MarketPlacePurchasesOverView
 from scan.views.peers import PeerMonitorListView, PeerMonitorDetailView, peers_charts_view
 
 
 urlpatterns = [
-    path('', index, name='index'),
+    path('index/', index, name='index'),
     path('blocks/', BlockListView.as_view(), name='blocks'),
     path('block/<str:height>', BlockDetailView.as_view(), name='block-detail'),
     path('mos/', MultiOutListView.as_view(), name='mos'),
@@ -44,6 +45,7 @@ urlpatterns = [
     path('assets/', AssetListView.as_view(), name='assets'),
     path('asset/<str:id>', AssetDetailView.as_view(), name='asset-detail'),
     path('mps/purchases', MarketPlacePurchasesListView.as_view(), name='mps-purchases'),
+    path('purchases/', MarketPlacePurchasesOverView.as_view(), name='purchases'),
     path('mps/', MarketPlaceListView.as_view(), name='mps'),
     path('mp/<str:id>', MarketPlaceDetailView.as_view(), name='mp-detail'),
     path('ats/', AtListView.as_view(), name='ats'),
@@ -54,6 +56,7 @@ urlpatterns = [
     path('peer/<str:address>', PeerMonitorDetailView.as_view(), name='peer-detail'),
     path('admin/', admin.site.urls),
     path('api/', include(('api.urls', 'api'), namespace='api')),
+    path('compute/', compute_pool_cloud, name='compute'),
 ]
 
 if settings.DEBUG:

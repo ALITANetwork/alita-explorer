@@ -1,0 +1,44 @@
+{% load humanize %}
+{% load burst_tags %}
+
+
+<div class="card-deck mb-3">
+  <div class="card mb-4 shadow-sm">
+    <div class="card-body">
+
+      <div class="table-responsive">
+        <table class="table table-hover small table-sm">
+          <thead>
+          <tr>
+            <th scope="col">Block</th>
+            <th scope="col">Timestamp</th>
+            <th scope="col">Seller</th>
+            <th scope="col">Buyer</th>
+            <th scope="col">Quantity</th>
+            <th scope="col">Price</th>
+          </tr>
+          </thead>
+          <tbody>
+          {% for purchase in purchases %}
+            <tr>
+              <td><a href="{% url 'block-detail' purchase.height %}">{{ purchase.height }}</a></td>
+              <td class="text-nowrap">{{ purchase.timestamp|naturaltime }}</td>
+              <td class="text-nowrap">
+                {% include "account_link.html" with account_id=purchase.seller_id account_name=purchase.seller_name %}
+              </td>
+              <td class="text-nowrap">
+                {% include "account_link.html" with account_id=purchase.buyer_id account_name=purchase.buyer_name %}
+              </td>
+              <td>{{ purchase.quantity|intcomma }}
+              </td>
+              <td class="text-nowrap">{{ purchase.price|burst_amount|intcomma }} Alita</td>
+            </tr>
+          {% endfor %}
+          </tbody>
+        </table>
+      </div>
+
+    </div>
+  </div>
+</div>
+

@@ -1,0 +1,51 @@
+<!doctype html>
+<!--
+* Alita - Alita Chain Dashboard
+* @version 1.0.0-alpha.7
+* @link https://github.com/tabler/tabler
+* Copyright 2018-2019 The Tabler Authors
+* Copyright 2018-2019 codecalm.net Paweł Kuna
+* Licensed under MIT (https://tabler.io/license)
+-->
+{% extends 'alita-base.html' %}
+
+{% load humanize %}
+{% load burst_tags %}
+
+{% block content %}
+
+
+  <h5 class="p-2">Compute Purchased
+
+  </h5>
+  <div class="card-deck mb-3">
+    <div class="card mb-4 shadow-sm">
+      <div class="card-body">
+
+        <div class="d-flex flex-column flex-md-row align-items-center">
+          <small class="my-0 mr-md-auto text-muted">
+            {% if purchases_cnt > paginator.count %}
+              More than > {{ purchases_cnt|intcomma }} purchases found<br>
+              <small>(Showing the last 100k records)</small>
+            {% else %}
+              A total of
+              {% if purchases %}
+                {{ paginator.count|intcomma }}
+              {% else %}
+                0
+              {% endif %}
+              purchases found
+            {% endif %}
+          </small>
+          {% include "paginator.html" %}
+        </div>
+
+        {% include "marketplace/purchases_list.html" %}
+
+        {% include "paginator.html" %}
+
+      </div>
+    </div>
+  </div>
+
+{% endblock %}

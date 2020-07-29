@@ -6,7 +6,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
     <meta name="description" content="{% block description %}{% endblock %}">
     <meta name="author" content="Lev Lybin">
-    <title>RAPTOR {% if test_net %}TestNet {% endif %}RAPTOR Explorer{% block title %}{% endblock %}</title>
+    <title>Alita {% if test_net %}TestNet {% endif %}Alita Explorer{% block title %}{% endblock %}</title>
     <link href="{% static 'favicon.ico' %}" rel="icon">
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
     <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.8.2/css/all.css" integrity="sha384-oS3vJWv+0UjzBfQzYUhtDYW+Pj2yciDJxpsK1OYPAYjqT085Qq/1cq5FLXAZQ7Ay" crossorigin="anonymous">
@@ -89,11 +89,11 @@
 
     <footer class="footer mt-auto py-3">
       <div class="container text-center">
-        Developed by <a href="/" target="_blank">RAPTOR CHAIN</a>
+        Developed by <a href="/" target="_blank">ALITA CHAIN</a>
         <br>
         {% if not test_net %}
           Donations:
-          <a href="{% url 'address-detail' 2761210303826197932 %}">RAPTOR-CZFE-6K8V-JMTF-4CGNE</a>
+          <a href="{% url 'address-detail' 2761210303826197932 %}">ALITA-CZFE-6K8V-JMTF-4CGNE</a>
         {% endif %}
         <br>
       </div>

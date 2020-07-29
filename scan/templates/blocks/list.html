@@ -58,8 +58,8 @@
                     0
                   {% endif %}
                 </td>
-                <td class="text-nowrap">{{ block.total_amount|burst_amount|rounding:4|intcomma }} Raptor</td>
-                <td class="text-nowrap">{{ block|block_reward_fee|rounding:4|intcomma }} Raptor</td>
+                <td class="text-nowrap">{{ block.total_amount|burst_amount|rounding:4|intcomma }} ALITA</td>
+                <td class="text-nowrap">{{ block|block_reward_fee|rounding:4|intcomma }} ALITA</td>
                 <td>{{ block.payload_length|filesizeformat }}</td>
                 <td class="text-nowrap">
                   {% include "account_link.html" with account_id=block.generator_id account_name=block.generator_name filtered_account=request.GET.m %}

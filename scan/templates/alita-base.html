@@ -29,10 +29,12 @@
   <link href="../static/libs/jqvmap/dist/jqvmap.min.css" rel="stylesheet" />
   <link href="../static/css/tabler.min.css" rel="stylesheet" />
   <link href="../static/css/demo.min.css" rel="stylesheet" />
+  <link rel="stylesheet" href="../static/css/alita-base.css" />
   <style>
     body {
       display: none;
     }
+
   </style>
 </head>
 
@@ -170,7 +172,7 @@
                       <path stroke="none" d="M0 0h24v24H0z" />
                       <path
                         d="M12 17.75l-6.172 3.245 1.179-6.873-4.993-4.867 6.9-1.002L12 2l3.086 6.253 6.9 1.002-4.993 4.867 1.179 6.873z" />
-                      </svg>
+                    </svg>
                   </span>
                   <span class="nav-link-title">
                     Compute Market
@@ -185,14 +187,14 @@
                       <path stroke="none" d="M0 0h24v24H0z" />
                       <path
                         d="M12 17.75l-6.172 3.245 1.179-6.873-4.993-4.867 6.9-1.002L12 2l3.086 6.253 6.9 1.002-4.993 4.867 1.179 6.873z" />
-                      </svg>
+                    </svg>
                   </span>
                   <span class="nav-link-title">
                     Compute Purchased
                   </span>
                 </a>
-			  </li>
-			  <!-- 新增 -->
+              </li>
+              <!-- 新增 -->
               <li class="nav-item last-nav-item">
                 <a class="nav-link" href="{% url 'purchases' %}">
                   <span class="nav-link-icon d-md-none d-lg-inline-block"><svg xmlns="http://www.w3.org/2000/svg"
@@ -201,16 +203,17 @@
                       <path stroke="none" d="M0 0h24v24H0z" />
                       <path
                         d="M12 17.75l-6.172 3.245 1.179-6.873-4.993-4.867 6.9-1.002L12 2l3.086 6.253 6.9 1.002-4.993 4.867 1.179 6.873z" />
-                      </svg>
+                    </svg>
                   </span>
                   <span class="nav-link-title last-nav-link-title">
-					Join Testnet
-					<div class="showJoin">
-						<h3>Download</h3>
-						<a href="http://alita.global/alita-miner-publish.zip">For MacBook</a>
-						<a href="http://download.alita.services:8080/Alita_verifier_mining_client-1.0.0.tar.gz">For Linux</a>
-						<a href="http://app.gravity.top:8081/apk/alita0.35.2.apk">For Android</a>
-					</div>
+                    Join Testnet
+                    <div class="showJoin">
+                      <h3>Download</h3>
+                      <a href="http://alita.global/alita-miner-publish.zip">For MacBook</a>
+                      <a href="http://download.alita.services:8080/Alita_verifier_mining_client-1.0.0.tar.gz">For
+                        Linux</a>
+                      <a href="http://app.gravity.top:8081/apk/alita0.35.2.apk">For Android</a>
+                    </div>
                   </span>
                 </a>
               </li>
@@ -774,7 +777,8 @@
             online_peers_data
           }
         } {
-          % endif %
+          %
+          endif %
         }),
         onLabelShow: function (event, label, code) {
           if (chart_data[code] > 0) {

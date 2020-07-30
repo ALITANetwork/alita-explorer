@@ -33,7 +33,6 @@
     body {
       display: none;
     }
-
   </style>
 </head>
 
@@ -194,7 +193,7 @@
                 </a>
 			  </li>
 			  <!-- 新增 -->
-              <li class="nav-item">
+              <li class="nav-item last-nav-item">
                 <a class="nav-link" href="{% url 'purchases' %}">
                   <span class="nav-link-icon d-md-none d-lg-inline-block"><svg xmlns="http://www.w3.org/2000/svg"
                       class="icon" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor"
@@ -204,8 +203,14 @@
                         d="M12 17.75l-6.172 3.245 1.179-6.873-4.993-4.867 6.9-1.002L12 2l3.086 6.253 6.9 1.002-4.993 4.867 1.179 6.873z" />
                       </svg>
                   </span>
-                  <span class="nav-link-title">
-                    Join Testnet
+                  <span class="nav-link-title last-nav-link-title">
+					Join Testnet
+					<div class="showJoin">
+						<h3>Download</h3>
+						<a href="http://alita.global/alita-miner-publish.zip">For MacBook</a>
+						<a href="http://download.alita.services:8080/Alita_verifier_mining_client-1.0.0.tar.gz">For Linux</a>
+						<a href="http://app.gravity.top:8081/apk/alita0.35.2.apk">For Android</a>
+					</div>
                   </span>
                 </a>
               </li>

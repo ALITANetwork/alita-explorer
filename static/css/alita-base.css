@@ -9,7 +9,7 @@
 .navbar-expand-md .last-nav-item .showJoin {
   position: absolute;
   width: 300px;
-  top: 67px;
+  top: 48px;
   right: -88px;
   z-index: 999;
   background-color: #fff;
@@ -43,18 +43,15 @@
     border-bottom: 1px solid #f5f4f5;
     padding-left: 5px;
     line-height: 30px;
+    width: 100%;
 }
 
-.navbar-expand-md .last-nav-item .showJoin i {
+/* .navbar-expand-md .last-nav-item .showJoin i {
   position: absolute;
   top: -35px;
   left: 132px;
   display: block;
   width: 0px;
-  border-width: 20px;
-  border-style: solid;
+  border: 20px solid #e9e7e9;
   border-color: transparent transparent #fff transparent;
-}
-.navbar-expand-md .last-nav-item .showJoin h3{
-    width: 100%;
-  }
+} */

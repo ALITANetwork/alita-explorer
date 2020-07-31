@@ -7953,8 +7953,7 @@ Navbar vertical
 .page {
   display: flex;
   flex-direction: column;
-  position: relative;
-  min-height: 100vh; }
+  position: relative;}
 
 .content {
   padding-top: 1.25rem;

@@ -55,3 +55,7 @@
   border: 20px solid #e9e7e9;
   border-color: transparent transparent #fff transparent;
 } */
+.container-xl .row .col-sm-6 .card .changeAvatar{
+  background: #cbd8f7 no-repeat center/cover;
+}
+

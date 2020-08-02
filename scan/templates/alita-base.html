@@ -794,7 +794,6 @@
           %
           endif %
         }),
-        // values:(chart_data={% if online_peers_data %}{{ online_peers_data }}{% endif %}),
         onLabelShow: function (event, label, code) {
           if (chart_data[code] > 0) {
             label.append(': <strong>' + chart_data[code] + '</strong>');

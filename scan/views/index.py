@@ -47,19 +47,15 @@ def index(request):
     node_total = 0
     node_schedulable = 0
     node_percent = 0
-    node_health = "Health"
     cpu_total = 0
     cpu_used = 0
     cpu_percent = 0
-    cpu_health = "Health"
     memory_total = 0
     memory_used = 0
     memory_percent = 0
-    memory_health = "Health"
     storage_total = 0
     storage_used = 0
     storage_percent = 0
-    storage_health = "Health"
 
     if compute_data:
         node_total = compute_data['data']['nodeSummary']['Total']
@@ -71,10 +67,13 @@ def index(request):
         memory_total = compute_data['data']['memorySummary']['Total']
         memory_used = compute_data['data']['memorySummary']['Used']
         memory_percent = compute_data['data']['memorySummary']['Percent']
+        storage_total = compute_data['data']['storageSummary']['Total']
+        storage_used = compute_data['data']['storageSummary']['Used']
+        storage_percent = compute_data['data']['storageSummary']['Percent']
         node_health = format_health(node_percent)
         cpu_health = format_health(100 - cpu_percent)
         memory_health = format_health(100 - memory_percent)
-        storage_health = format_health(storage_percent)
+        storage_health = format_health(100 - storage_percent)
     else:
         node_health = "UnHealth"
         cpu_health = "UnHealth"
@@ -152,7 +151,7 @@ def index(request):
 
 
 def format_health(percent):
-    if int(percent) > 70:
+    if int(percent) > 20:
         return "Health"
     else:
         return "UnHealth"

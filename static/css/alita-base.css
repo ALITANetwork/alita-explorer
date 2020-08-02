@@ -58,4 +58,6 @@
 .container-xl .row .col-sm-6 .card .changeAvatar{
   background: #cbd8f7 no-repeat center/cover;
 }
-
+.navbar-expand-md .last-nav-item .showJoin a.forbid{
+  cursor: none;
+}

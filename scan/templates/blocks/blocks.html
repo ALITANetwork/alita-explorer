@@ -57,7 +57,8 @@
             {% for block in blocks %}
               <tr>
                 <td><a href="{% url 'block-detail' block.height %}">{{ block.height }}</a></td>
-                <td class="text-nowrap">{{ block.timestamp|naturaltime }}</td>
+                <!-- <td class="text-nowrap">{{ block.timestamp|naturaltime }}</td> -->
+                <td class="text-nowrap">{{ block.timestamp|date:"Y-m-d H:i:s" }}</td>
                 <td>
                   {% if block.txs_cnt > 0 %}
                     <a href="{% url 'txs' %}?block={{ block.height }}">{{ block.txs_cnt|intcomma }}</a>

@@ -207,6 +207,7 @@
             </div>
           </div>
           <div class="col-sm-6 col-lg-3">
+            {% if cpu_health == 'Health' %}
             <div class="card">
               <div class="card-body p-4 py-5 text-center">
                 <span class="avatar avatar-xl mb-4 bg-green-lt">{% if cpu_percent %}{{ cpu_percent }}{% endif %}%</span>
@@ -229,8 +230,33 @@
                 </div>
               </div>
             </div>
+            {% else %}
+            <div class="card">
+              <div class="card-body p-4 py-5 text-center">
+                <span class="avatar avatar-xl mb-4 bg-green-lt">{% if cpu_percent %}{{ cpu_percent }}{% endif %}%</span>
+                <h3 class="mb-0">CPU</h3>
+                <p class="text-muted">CPU Used: {% if cpu_used %}{{ cpu_used }}{% endif %} Core Total:
+                  {% if cpu_total %}{{ cpu_total }}{% endif %} Core</p>
+                <p class="mb-3">
+                  {% if cpu_health == 'Health' %}
+                  <span class="badge bg-green-lt">{% if cpu_health %}{{ cpu_health }}{% endif %}</span>
+                  {% else %}
+                  <span class="badge bg-red-lt">{% if cpu_health %}{{ cpu_health }}{% endif %}</span>
+                  {% endif %}
+                </p>
+              </div>
+              <div class="progress card-progress">
+                <div class="progress-bar bg-green" style="width: {% if cpu_percent %}{{ cpu_percent }}{% endif %}%"
+                  role="progressbar" aria-valuenow="{% if cpu_percent %}{{ cpu_percent }}{% endif %}" aria-valuemin="0"
+                  aria-valuemax="100">
+                  <span class="sr-only">{% if cpu_percent %}{{ cpu_percent }}{% endif %}% Complete</span>
+                </div>
+              </div>
+            </div>
+            {% endif %}
           </div>
           <div class="col-sm-6 col-lg-3">
+            {% if memory_health == 'Health' %}
             <div class="card">
               <div class="card-body p-4 py-5 text-center">
                 <span class="avatar avatar-xl mb-4"
@@ -254,6 +280,30 @@
                 </div>
               </div>
             </div>
+            {% else %}
+            <div class="card">
+              <div class="card-body p-4 py-5 text-center">
+                <span class="avatar avatar-xl mb-4" style="background: #ccc9c9 no-repeat center/cover;">{% if memory_percent %}{{ memory_percent }}{% endif %}%</span>
+                <h3 class="mb-0" style="color: #ccc9c9;">MEMORY</h3>
+                <p class="text-muted" style="color: #ccc9c9;">Memory Used: {% if memory_used %}{{ memory_used }}{% endif %} G Total:
+                  {% if memory_total %}{{ memory_total }}{% endif %} G</p>
+                <p class="mb-3" style="color: #ccc9c9;">
+                  {% if memory_health == 'Health' %}
+                  <span class="badge">{% if memory_health %}{{ memory_health }}{% endif %}</span>
+                  {% else %}
+                  <span class="badge">{% if memory_health %}{{ memory_health }}{% endif %}</span>
+                  {% endif %}
+                </p>
+              </div>
+              <div class="progress card-progress">
+                <div class="progress-bar" style="width: {% if memory_percent %}{{ memory_percent }}{% endif %}%"
+                  role="progressbar" aria-valuenow="{% if memory_percent %}{{ memory_percent }}{% endif %}"
+                  aria-valuemin="0" aria-valuemax="100">
+                  <span class="sr-only">{% if memory_percent %}{{ memory_percent }}{% endif %}% Complete</span>
+                </div>
+              </div>
+            </div>
+            {% endif %}
           </div>
           <div class="col-sm-6 col-lg-3">
             <!-- #ebf1e4 -->
@@ -907,10 +957,21 @@
         borderColor: 'transparent',
         scaleColors: ["#eff0f1", "#327fdb"],
         normalizeFunction: 'polynomial',
-        values: (chart_data = {
+        /* values: (chart_data = {
           {
             online_peers_data
           }
+        }), */
+        values: (chart_data = {
+          %
+          if online_peers_data %
+        } {
+          {
+            online_peers_data
+          }
+        } {
+          %
+          endif %
         }),
         onLabelShow: function (event, label, code) {
           if (chart_data[code] > 0) {

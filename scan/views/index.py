@@ -28,15 +28,9 @@ def index(request):
     if blocks:
         last_block = blocks.first()
 
-    goods = Goods.objects.using('java_wallet').order_by('-height')[:3]
+    latest_good = Goods.objects.using('java_wallet').order_by('-height')[:3]
 
-    if goods:
-        latest_good = goods.first()
-
-    purchases = Purchase.objects.using('java_wallet').order_by('-height')[:3]
-
-    if purchases:
-        latest_purchase = purchases.first()
+    latest_purchase = Purchase.objects.using('java_wallet').order_by('-height')[:3]
 
     countries = PeerMonitor.objects.filter(
         state=PeerMonitor.State.ONLINE
@@ -89,9 +83,6 @@ def index(request):
         cpu_health = "UnHealth"
         memory_health = "UnHealth"
         storage_health = "UnHealth"
-
-
-
 
     """计算生成区块时间"""
     forge_block_time_format = 'NaN'

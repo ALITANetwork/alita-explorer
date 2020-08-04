@@ -4,7 +4,7 @@ from django.db.models import Count
 from django.shortcuts import render
 from django.views.decorators.cache import cache_page
 
-from java_wallet.models import Transaction, Block
+from java_wallet.models import Transaction, Block, Goods, Purchase
 from scan.helpers import get_pending_txs
 from scan.models import PeerMonitor
 from scan.views.blocks import fill_data_block
@@ -14,7 +14,7 @@ from scan.views.transactions import fill_data_transaction
 
 @cache_page(5)
 def index(request):
-    global last_block
+    global last_block, latest_good, latest_purchase
     txs = Transaction.objects.using('java_wallet').order_by('-height')[:5]
 
     for t in txs:
@@ -27,6 +27,16 @@ def index(request):
 
     if blocks:
         last_block = blocks.first()
+
+    goods = Goods.objects.using('java_wallet').order_by('-height')[:3]
+
+    if goods:
+        latest_good = goods.first()
+
+    purchases = Purchase.objects.using('java_wallet').order_by('-height')[:3]
+
+    if purchases:
+        latest_purchase = purchases.first()
 
     countries = PeerMonitor.objects.filter(
         state=PeerMonitor.State.ONLINE
@@ -126,6 +136,8 @@ def index(request):
         'blocks': blocks,
         'txs_pending': get_pending_txs(),
         'last_block': last_block,
+        'latest_good': latest_good,
+        'latest_purchase': latest_purchase,
         'online_peers_num': str(online_peers_num),
         'online_peers_data': json.dumps(online_peers_data),
         'node_total': str(node_total),

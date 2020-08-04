@@ -20,7 +20,7 @@
             </tr>
             </thead>
             <tbody>
-            {% for good in goods %}
+            {% for good in latest_good %}
               <tr>
                 <td><a href="{% url 'mp-detail' good.id %}">{{ good.id|truncatechars:10 }}</a></td>
                 <td style="word-wrap: break-word; max-width: 250px">{{ good.name }}</td>

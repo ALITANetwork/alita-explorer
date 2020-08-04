@@ -1,5 +1,5 @@
 from django.views.generic import ListView
-
+from burst.constants import BLOCK_CHAIN_START_AT
 from java_wallet.models import Block
 from scan.caching_paginator import CachingPaginator
 from scan.helpers import (
@@ -9,7 +9,7 @@ from scan.helpers import (
     get_last_height,
 )
 from scan.views.base import IntSlugDetailView
-
+from datetime import datetime
 
 def fill_data_block(obj):
     obj.txs_cnt = get_txs_count_in_block(obj.id)
@@ -21,6 +21,7 @@ def fill_data_block(obj):
         obj.pool_name = get_account_name(pool_id)
         # if boolean == True:
         # obj.timestamp = datetime.fromtimestamp(obj.timestamp + BLOCK_CHAIN_START_AT + 28800)
+    else:
         obj.timestamp = datetime.fromtimestamp(obj.timestamp + BLOCK_CHAIN_START_AT + 28800)
 
 

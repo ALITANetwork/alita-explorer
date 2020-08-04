@@ -29,8 +29,7 @@
               <td class="text-nowrap">
                 {% include "account_link.html" with account_id=purchase.buyer_id account_name=purchase.buyer_name %}
               </td>
-              <td>{{ purchase.quantity|intcomma }}
-              </td>
+              <td>{{ purchase.quantity|intcomma }}</td>
               <td class="text-nowrap">{{ purchase.price|burst_amount|intcomma }} Alita</td>
             </tr>
           {% endfor %}

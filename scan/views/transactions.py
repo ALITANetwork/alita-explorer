@@ -7,6 +7,8 @@ from scan.caching_paginator import CachingPaginator
 from scan.helpers import get_account_name, get_txs_count, get_last_height
 from scan.models import MultiOut
 from scan.views.base import IntSlugDetailView
+from datetime import datetime
+from burst.constants import BLOCK_CHAIN_START_AT
 
 
 def fill_data_transaction(obj, list_page=True):
@@ -18,7 +20,7 @@ def fill_data_transaction(obj, list_page=True):
         v, obj.multiout = MultiOutPack().unpack_header(obj.attachment_bytes)
         if not list_page:
             obj.recipients = MultiOut.objects.filter(tx_id=obj.id).all()
-
+    obj.block_timestamp = datetime.fromtimestamp(obj.block_timestamp + BLOCK_CHAIN_START_AT + 28800)
 
 class TxListView(ListView):
     model = Transaction

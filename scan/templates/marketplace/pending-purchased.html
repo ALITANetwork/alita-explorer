@@ -19,7 +19,7 @@
           </tr>
           </thead>
           <tbody>
-          {% for purchase in purchases %}
+          {% for purchase in latest_purchase %}
             <tr>
               <td><a href="{% url 'block-detail' purchase.height %}">{{ purchase.height }}</a></td>
               <td class="text-nowrap">{{ purchase.timestamp|naturaltime }}</td>

@@ -182,6 +182,7 @@
         <h4 class="card-title">Computing Network</h4>
         <div class="row row-deck row-cards">
           <div class="col-sm-6 col-lg-3">
+            {% if node_health == 'Health' %}
             <div class="card">
               <div class="card-body p-4 py-5 text-center">
                 <span class="avatar avatar-xl mb-4 changeAvatar"
@@ -205,6 +206,30 @@
                 </div>
               </div>
             </div>
+            {% else %}
+            <div class="card">
+              <div class="card-body p-4 py-5 text-center">
+                <span class="avatar avatar-xl mb-4 changeAvatar" style="background: #ccc9c9 no-repeat center/cover;">{% if node_percent %}{{ node_percent }}{% endif %}</span>
+                <h3 class="mb-0" style="color: #ccc9c9;">Node Schedule</h3>
+                <p class="text-muted" style="color: #ccc9c9;">Ready: {% if node_schedulable %}{{ node_schedulable }}{% endif %} Total:
+                  {% if node_total %}{{ node_total }}{% endif %}</p>
+                <p class="mb-3" style="color: #ccc9c9;">
+                  {% if node_health == 'Health' %}
+                  <span class="badge bg-green-lt">{% if node_health %}{{ node_health }}{% endif %}</span>
+                  {% else %}
+                  <span class="badge bg-red-lt">{% if node_health %}{{ node_health }}{% endif %}</span>
+                  {% endif %}
+                </p>
+              </div>
+              <div class="progress card-progress">
+                <div class="progress-bar" style="width: {% if node_percent %}{{ node_percent }}{% endif %}%"
+                  role="progressbar" aria-valuenow="{% if node_percent %}{{ node_percent }}{% endif %}"
+                  aria-valuemin="0" aria-valuemax="100">
+                  <span class="sr-only">{% if node_percent %}{{ node_percent }}{% endif %}% Complete</span>
+                </div>
+              </div>
+            </div>
+            {% endif %}
           </div>
           <div class="col-sm-6 col-lg-3">
             {% if cpu_health == 'Health' %}
@@ -233,11 +258,11 @@
             {% else %}
             <div class="card">
               <div class="card-body p-4 py-5 text-center">
-                <span class="avatar avatar-xl mb-4 bg-green-lt">{% if cpu_percent %}{{ cpu_percent }}{% endif %}%</span>
-                <h3 class="mb-0">CPU</h3>
-                <p class="text-muted">CPU Used: {% if cpu_used %}{{ cpu_used }}{% endif %} Core Total:
+                <span class="avatar avatar-xl mb-4" style="background: #ccc9c9 no-repeat center/cover;">{% if cpu_percent %}{{ cpu_percent }}{% endif %}%</span>
+                <h3 class="mb-0" style="color: #ccc9c9;">CPU</h3>
+                <p class="text-muted" style="color: #ccc9c9;">CPU Used: {% if cpu_used %}{{ cpu_used }}{% endif %} Core Total:
                   {% if cpu_total %}{{ cpu_total }}{% endif %} Core</p>
-                <p class="mb-3">
+                <p class="mb-3" style="color: #ccc9c9;">
                   {% if cpu_health == 'Health' %}
                   <span class="badge bg-green-lt">{% if cpu_health %}{{ cpu_health }}{% endif %}</span>
                   {% else %}
@@ -1415,27 +1440,13 @@
         backgroundColor: 'transparent',
         color: 'rgba(120, 130, 140, .1)',
         borderColor: 'transparent',
-        scaleColors: ["#eff0f1", "#327fdb"],
+        scaleColors: ["#d2e1f3", "#206bc4"],
         normalizeFunction: 'polynomial',
-        /* values: (chart_data = {
-          {
-            online_peers_data
-          }
-        }), */
-        values: (chart_data = {
-          %
-          if online_peers_data %
-        } {
-          {
-            online_peers_data
-          }
-        } {
-          %
-          endif %
-        }),
+        // values: (chart_data = {"af":16, "al":11, "dz":158, "ao":85, "ag":1, "ar":351, "am":8, "au":1219, "at":366, "az":52, "bs":7, "bh":21, "bd":105, "bb":3, "by":52, "be":461, "bz":1, "bj":6, "bt":1, "bo":19, "ba":16, "bw":12, "br":2023, "bn":11, "bg":44, "bf":8, "bi":1, "kh":11, "cm":21, "ca":1563, "cv":1, "cf":2, "td":7, "cl":199, "cn":5745, "co":283, "km":0, "cd":12, "cg":11, "cr":35, "ci":22, "hr":59, "cy":22, "cz":195, "dk":304, "dj":1, "dm":0, "do":50, "ec":61, "eg":216, "sv":21, "gq":14, "er":2, "ee":19, "et":30, "fj":3, "fi":231, "fr":2555, "ga":12, "gm":1, "ge":11, "de":3305, "gh":18, "gr":305, "gd":0, "gt":40, "gn":4, "gw":0, "gy":2, "ht":6, "hn":15, "hk":226, "hu":132, "is":12, "in":1430, "id":695, "ir":337, "iq":84, "ie":204, "il":201, "it":2036, "jm":13, "jp":5390, "jo":27, "kz":129, "ke":32, "ki":0, "kr":986, "undefined":5, "kw":117, "kg":4, "la":6, "lv":23, "lb":39, "ls":1, "lr":0, "ly":77, "lt":35, "lu":52, "mk":9, "mg":8, "mw":5, "my":218, "mv":1, "ml":9, "mt":7, "mr":3, "mu":9, "mx":1004, "md":5, "mn":5, "me":3, "ma":91, "mz":10, "mm":35, "na":11, "np":15, "nl":770, "nz":138, "ni":6, "ne":5, "ng":206, "no":413, "om":53, "pk":174, "pa":27, "pg":8, "py":17, "pe":153, "ph":189, "pl":438, "pt":223, "qa":126, "ro":158, "ru":1476, "rw":5, "ws":0, "st":0, "sa":434, "sn":12, "rs":38, "sc":0, "sl":1, "sg":217, "sk":86, "si":46, "sb":0, "za":354, "es":1374, "lk":48, "kn":0, "lc":1, "vc":0, "sd":65, "sr":3, "sz":3, "se":444, "ch":522, "sy":59, "tw":426, "tj":5, "tz":22, "th":312, "tl":0, "tg":3, "to":0, "tt":21, "tn":43, "tr":729, "tm":0, "ug":17, "ua":136, "ae":239, "gb":2258, "us":4624, "uy":40, "uz":37, "vu":0, "ve":285, "vn":101, "ye":30, "zm":15, "zw":5}),
+        values:(chart_data={{online_peers_data}}),
         onLabelShow: function (event, label, code) {
           if (chart_data[code] > 0) {
-            label.append(': <strong>' + values.chart_data[code] + '</strong>');
+            label.append(': <strong>' + chart_data[code] + '</strong>');
           }
         },
       });
@@ -1607,6 +1618,6 @@
   <script>
     document.body.style.display = "block"
 
-  </script> -->
+  </script>
 </body>
 {% endblock %}

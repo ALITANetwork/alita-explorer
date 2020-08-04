@@ -11,6 +11,7 @@ from scan.helpers import (
 from scan.views.base import IntSlugDetailView
 from datetime import datetime
 
+
 def fill_data_block(obj):
     obj.txs_cnt = get_txs_count_in_block(obj.id)
     obj.generator_name = get_account_name(obj.generator_id)
@@ -19,8 +20,9 @@ def fill_data_block(obj):
     if pool_id:
         obj.pool_id = pool_id
         obj.pool_name = get_account_name(pool_id)
-        # if boolean == True: 
+        obj.timestamp = datetime.fromtimestamp(obj.timestamp + BLOCK_CHAIN_START_AT + 28800)
         # obj.timestamp = datetime.fromtimestamp(obj.timestamp + BLOCK_CHAIN_START_AT + 28800)
+    else:
         obj.timestamp = datetime.fromtimestamp(obj.timestamp + BLOCK_CHAIN_START_AT + 28800)
 
 

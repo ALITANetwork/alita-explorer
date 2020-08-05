@@ -113,3 +113,11 @@ scan/static/img/.DS_Store
 scan/templates/.DS_Store
 static/.DS_Store
 static/favicon.ico
+
+/.idea/inspectionProfiles/Project_Default.xml
+/.idea/workspace.xml
+/.idea/burst_explorer.iml
+/.idea/misc.xml
+/.idea/modules.xml
+/.idea/inspectionProfiles/profiles_settings.xml
+/.idea/vcs.xml

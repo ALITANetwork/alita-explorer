@@ -26,7 +26,7 @@ ALITA-{{ address.id|num2rs }}
           </button>
         </div>
         <div class="modal-body text-center">
-          <div id="qr_code" title="BURST-{{ address.id|num2rs }}"></div>
+          <div id="qr_code" title="ALITA-{{ address.id|num2rs }}"></div>
         </div>
       </div>
     </div>
@@ -61,7 +61,7 @@ ALITA-{{ address.id|num2rs }}
               <td>
                 {{ address.unconfirmed_balance|burst_amount|intcomma }} ALITA {% comment %}<span class="text-info">(${{ address.unconfirmed_balance|burst_amount|in_usd|floatformat:2|intcomma }} @ ${{ burst_info.exchange.price_usd|rounding:4|intcomma }}/Raptor)</span>{% endcomment %}
                 {% if address.unconfirmed_balance != address.balance %}
-                  <i> + {{ address.balance|sub:address.unconfirmed_balance|burst_amount|intcomma }} Burst are locked</i>
+                  <i> + {{ address.balance|sub:address.unconfirmed_balance|burst_amount|intcomma }} ALITA are locked</i>
                 {% endif %}
               </td>
             </tr>

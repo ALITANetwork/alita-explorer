@@ -20,9 +20,7 @@ def fill_data_block(obj):
         obj.pool_id = pool_id
         obj.pool_name = get_account_name(pool_id)
         # if boolean == True:
-        # obj.timestamp = datetime.fromtimestamp(obj.timestamp + BLOCK_CHAIN_START_AT + 28800)
-    else:
-        obj.timestamp = datetime.fromtimestamp(obj.timestamp + BLOCK_CHAIN_START_AT + 28800)
+    obj.timestamp = datetime.fromtimestamp(obj.timestamp + BLOCK_CHAIN_START_AT + 28800)
 
 
 class BlockListView(ListView):

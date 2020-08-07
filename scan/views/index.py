@@ -23,7 +23,7 @@ def index(request):
     blocks = Block.objects.using('java_wallet').order_by('-height')[:5]
 
     for b in blocks:
-        fill_data_block(b)
+        fill_data_block(b, False)
 
     if blocks:
         last_block = blocks.first()

@@ -11,7 +11,8 @@ from scan.helpers import (
 from scan.views.base import IntSlugDetailView
 from datetime import datetime
 
-def fill_data_block(obj):
+
+def fill_data_block(obj, isdetail):
     obj.txs_cnt = get_txs_count_in_block(obj.id)
     obj.generator_name = get_account_name(obj.generator_id)
 
@@ -20,7 +21,10 @@ def fill_data_block(obj):
         obj.pool_id = pool_id
         obj.pool_name = get_account_name(pool_id)
         # if boolean == True:
-    obj.timestamp = datetime.fromtimestamp(obj.timestamp + BLOCK_CHAIN_START_AT + 28800)
+    if isdetail:
+        obj.timestamp = obj.timestamp + BLOCK_CHAIN_START_AT + 28800
+    else:
+        obj.timestamp = datetime.fromtimestamp(obj.timestamp + BLOCK_CHAIN_START_AT + 28800)
 
 
 class BlockListView(ListView):
@@ -46,7 +50,7 @@ class BlockListView(ListView):
         obj = context[self.context_object_name]
 
         for b in obj:
-            fill_data_block(b)
+            fill_data_block(b, False)
 
         context['last_height'] = get_last_height()
 
@@ -66,6 +70,6 @@ class BlockDetailView(IntSlugDetailView):
 
         obj = context[self.context_object_name]
 
-        fill_data_block(obj)
+        fill_data_block(obj, True)
 
         return context

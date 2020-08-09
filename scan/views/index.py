@@ -1,24 +1,52 @@
+from datetime import datetime
 import json
-
 from django.db.models import Count
 from django.shortcuts import render
 from django.views.decorators.cache import cache_page
 
+from burst.constants import BLOCK_CHAIN_START_AT
 from java_wallet.models import Transaction, Block, Goods, Purchase
 from scan.helpers import get_pending_txs
 from scan.models import PeerMonitor
 from scan.views.blocks import fill_data_block
 from scan.views.compute import compute_pool_cloud
 from scan.views.transactions import fill_data_transaction
+import pandas as pd
 
 
 @cache_page(5)
 def index(request):
     global last_block, latest_good, latest_purchase
     txs = Transaction.objects.using('java_wallet').order_by('-height')[:5]
-
+    now_label = datetime.now().strftime("%Y-%m-%d")
+    summary_dict = {now_label: [0, 0, 0]}
+    df = pd.DataFrame(summary_dict)
     for t in txs:
+        block_time = datetime.fromtimestamp(t.block_timestamp + BLOCK_CHAIN_START_AT + 28800)
+        time_label = block_time.strftime("%Y-%m-%d")
+        if time_label in df.columns:
+            if t.type == 0:
+                df[time_label].ix['0'] += 1
+            elif t.type == 3:
+                df[time_label].ix['1'] += 1
+            else:
+                df[time_label].ix['2'] += 1
+        else:
+            if t.type == 0:
+                label_list = [1, 0, 0]
+            elif t.type == 3:
+                label_list = [0, 1, 0]
+            else:
+                label_list = [0, 0, 1]
+            df[time_label] = label_list
+
         fill_data_transaction(t, list_page=True)
+
+    # show traffic summary
+    list_lable = df.columns
+    list_lable_payment = df.ix['0']
+    list_lable_goods = df.ix['1']
+    list_lable_other = df.ix['2']
 
     blocks = Block.objects.using('java_wallet').order_by('-height')[:5]
 
@@ -148,6 +176,10 @@ def index(request):
         'storage_percent': str(storage_percent),
         'storage_health': storage_health,
         'forge_block_time_format': forge_block_time_format,
+        'list_lable': list_lable,
+        'list_lable_payment': list_lable_payment,
+        'list_lable_goods': list_lable_goods,
+        'list_lable_other': list_lable_other,
     }
 
     return render(request, 'home/index.html', context)
@@ -158,3 +190,8 @@ def format_health(percent):
         return "Health"
     else:
         return "UnHealth"
+
+
+def traffic_summary(obj):
+    block_time = datetime.fromtimestamp(obj.block_timestamp + BLOCK_CHAIN_START_AT + 28800)
+    time_label = block_time.strftime("%Y-%m-%d")

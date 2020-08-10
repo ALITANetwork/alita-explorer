@@ -1,3 +1,4 @@
+import html
 from datetime import datetime
 import json
 from django.db.models import Count
@@ -17,20 +18,20 @@ import pandas as pd
 @cache_page(5)
 def index(request):
     global last_block, latest_good, latest_purchase
-    txs = Transaction.objects.using('java_wallet').order_by('-height')[:5]
+    txs_summary = Transaction.objects.using('java_wallet').order_by('-height')[:100]
     now_label = datetime.now().strftime("%Y-%m-%d")
     summary_dict = {now_label: [0, 0, 0]}
     df = pd.DataFrame(summary_dict)
-    for t in txs:
+    for t in txs_summary:
         block_time = datetime.fromtimestamp(t.block_timestamp + BLOCK_CHAIN_START_AT + 28800)
         time_label = block_time.strftime("%Y-%m-%d")
         if time_label in df.columns:
             if t.type == 0:
-                df[time_label].ix['0'] += 1
+                df[time_label].ix[0] += 1
             elif t.type == 3:
-                df[time_label].ix['1'] += 1
+                df[time_label].ix[1] += 1
             else:
-                df[time_label].ix['2'] += 1
+                df[time_label].ix[2] += 1
         else:
             if t.type == 0:
                 label_list = [1, 0, 0]
@@ -40,13 +41,15 @@ def index(request):
                 label_list = [0, 0, 1]
             df[time_label] = label_list
 
-        fill_data_transaction(t, list_page=True)
-
     # show traffic summary
-    list_lable = df.columns
-    list_lable_payment = df.ix['0']
-    list_lable_goods = df.ix['1']
-    list_lable_other = df.ix['2']
+    list_lable = df.columns.tolist()
+    list_lable_payment = df.ix[0].tolist()
+    list_lable_goods = df.ix[1].tolist()
+    list_lable_other = df.ix[2].tolist()
+
+    txs = Transaction.objects.using('java_wallet').order_by('-height')[:5]
+    for t in txs:
+        fill_data_transaction(t, list_page=True)
 
     blocks = Block.objects.using('java_wallet').order_by('-height')[:5]
 
@@ -73,8 +76,6 @@ def index(request):
         online_peers_data[key] = country['cnt']
 
     compute_data = compute_pool_cloud()
-
-    print(json.dumps(online_peers_data))
 
     node_total = 0
     node_schedulable = 0
@@ -158,7 +159,7 @@ def index(request):
         'latest_good': latest_good,
         'latest_purchase': latest_purchase,
         'online_peers_num': str(online_peers_num),
-        'online_peers_data': json.dumps(online_peers_data),
+        'online_peers_data': online_peers_data,
         'node_total': str(node_total),
         'node_schedulable': str(node_schedulable),
         'node_percent': str(node_percent),

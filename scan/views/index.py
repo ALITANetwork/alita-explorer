@@ -27,11 +27,11 @@ def index(request):
         time_label = block_time.strftime("%Y-%m-%d")
         if time_label in df.columns:
             if t.type == 0:
-                df[time_label].ix[0] += 1
+                df[time_label].iloc[0] += 1
             elif t.type == 3:
-                df[time_label].ix[1] += 1
+                df[time_label].iloc[1] += 1
             else:
-                df[time_label].ix[2] += 1
+                df[time_label].iloc[2] += 1
         else:
             if t.type == 0:
                 label_list = [1, 0, 0]
@@ -43,9 +43,9 @@ def index(request):
 
     # show traffic summary
     list_lable = df.columns.tolist()
-    list_lable_payment = df.ix[0].tolist()
-    list_lable_goods = df.ix[1].tolist()
-    list_lable_other = df.ix[2].tolist()
+    list_lable_payment = df.loc[0].tolist()
+    list_lable_goods = df.loc[1].tolist()
+    list_lable_other = df.loc[2].tolist()
 
     txs = Transaction.objects.using('java_wallet').order_by('-height')[:5]
     for t in txs:
@@ -192,7 +192,3 @@ def format_health(percent):
     else:
         return "UnHealth"
 
-
-def traffic_summary(obj):
-    block_time = datetime.fromtimestamp(obj.block_timestamp + BLOCK_CHAIN_START_AT + 28800)
-    time_label = block_time.strftime("%Y-%m-%d")

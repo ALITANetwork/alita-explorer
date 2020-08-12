@@ -1,4 +1,4 @@
-FROM burst8301:latest
+FROM alita-base:latest
 
 
 COPY . .

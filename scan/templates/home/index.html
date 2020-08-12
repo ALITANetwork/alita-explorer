@@ -784,11 +784,7 @@
         scaleColors: ["#eff0f1", "#327fdb"],
         normalizeFunction: 'polynomial',
         // values:(chart_data ={{online_peers_data}}),
-        values: (chart_data = {
-          {
-            online_peers_data
-          }
-        }),F
+        values: ({% if online_peers_data %}{{ online_peers_data|safe }}{% endif %}),
         /* values: (chart_data = {
           %
           if online_peers_data %

@@ -47,7 +47,7 @@
                 </td>
                 <td>{{ good.quantity|intcomma }}</td>
 {#                <td class="text-nowrap">{{ good.price|burst_amount|rounding:4|intcomma }} ALITA</td>#}
-                <td class="text-nowrap">{{ good.price|floatformat:6|burst_amount|rounding:6|intcomma }} ALITA</td>
+                <td class="text-nowrap">{{ good.price|burst_amount|rounding:6|floatformat:6|intcomma }} ALITA</td>
 {#                <td class="text-nowrap">{’%.6f’ %(good.price)|burst_amount|rounding:4|intcomma }} ALITA</td>#}
                 <td>{{ good.delisted|yesno }}</td>
               </tr>

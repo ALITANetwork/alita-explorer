@@ -1,4 +1,4 @@
-# BurstCoin Blockchain Explorer
+# Alita Explorer
 
 [![Codacy Badge](https://api.codacy.com/project/badge/Grade/f37cb0ffe26f4a88b12d12fb602c5ab2)](https://app.codacy.com/app/llybin/burst_explorer?utm_source=github.com&utm_medium=referral&utm_content=llybin/burst_explorer&utm_campaign=Badge_Grade_Dashboard)
 [![Codacy Badge](https://api.codacy.com/project/badge/Coverage/7fe1f95f5ef141e1ad5fe963cc88c825)](https://www.codacy.com/app/llybin/burst_explorer?utm_source=github.com&amp;utm_medium=referral&amp;utm_content=llybin/burst_explorer&amp;utm_campaign=Badge_Coverage)

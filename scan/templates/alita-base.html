@@ -204,10 +204,12 @@
                     <a class="linkA" style="color: #c3c4c5; cursor: not-allowed;" href="javascript:;"><span class="nav-link-icon d-md-none d-lg-inline-block"><svg xmlns="http://www.w3.org/2000/svg" class="icon" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round"><path stroke="none" d="M0 0h24v24H0z"></path><polyline points="9 11 12 14 20 6"></polyline><path d="M20 12v6a2 2 0 0 1 -2 2h-12a2 2 0 0 1 -2 -2v-12a2 2 0 0 1 2 -2h9"></path></svg>
                     </span>For Android</a>
                     <h3 style="width: 90%;box-sizing: border-box;margin-left: 5%">Wallet</h3>
-                    <a class="linkA changeGrey" href="http://wallet2.alita.services:8080/ALITA-WALLET.apk"><span class="nav-link-icon d-md-none d-lg-inline-block"><svg xmlns="http://www.w3.org/2000/svg" class="icon" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round"><path stroke="none" d="M0 0h24v24H0z"></path><polyline points="9 11 12 14 20 6"></polyline><path d="M20 12v6a2 2 0 0 1 -2 2h-12a2 2 0 0 1 -2 -2v-12a2 2 0 0 1 2 -2h9"></path></svg>
+                    <a id="hideShow" class="linkA changeGrey" style="position: relative" href="http://wallet2.alita.services:8080/ALITA-WALLET.apk"><span class="nav-link-icon d-md-none d-lg-inline-block"><svg xmlns="http://www.w3.org/2000/svg" class="icon" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round"><path stroke="none" d="M0 0h24v24H0z"></path><polyline points="9 11 12 14 20 6"></polyline><path d="M20 12v6a2 2 0 0 1 -2 2h-12a2 2 0 0 1 -2 -2v-12a2 2 0 0 1 2 -2h9"></path></svg>
                     </span>Android Wallet
-                      <div class="showCode">
-{#                        <img src="code.png">#}
+                      <div id="showCode" class="showCode" style="width: 150px;height: 200px;position:absolute;top:3px;left:50px;padding: 10px">
+                        <i style="display: block;width: 0;height: 0;border-top: 7px solid #fff;border-right:7px solid transparent;border-bottom:7px solid transparent;border-left:7px solid transparent;transform: rotate(180deg);margin-left: 55px"></i>
+                        <img src="https://alita.global/img/alita_adroid.png" style="width: 100%;margin-top: 0px">
+                        <p style="background-color:#fff;text-align: center;line-height: 15px">Scan code to download wallet app</p>
                       </div>
                     </a>
                     <a class="linkA changeGrey" href="http://wallet.alita.services:8301/"><span class="nav-link-icon d-md-none d-lg-inline-block"><svg xmlns="http://www.w3.org/2000/svg" class="icon" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round"><path stroke="none" d="M0 0h24v24H0z"></path><polyline points="9 11 12 14 20 6"></polyline><path d="M20 12v6a2 2 0 0 1 -2 2h-12a2 2 0 0 1 -2 -2v-12a2 2 0 0 1 2 -2h9"></path></svg>
@@ -394,6 +396,17 @@
   <!-- Tabler Core -->
   <script src="http://wallet2.alita.services:8305/static/js/tabler.min.js"></script>
   <script src="https://code.jquery.com/jquery-3.5.1.min.js"></script>
+  <script type="text/javascript">
+    var $show=$("#showCode");
+    var $hidShow=$("#hideShow");
+    $hidShow.mouseover(function(){
+      $show.css("display","block");
+    })
+    $hidShow.mouseout(function(){
+      $show.css("display","none")
+    })
+
+  </script>
   <script type="text/javascript">
     $(function(){
     var num=$(".ul1").find("li").length;

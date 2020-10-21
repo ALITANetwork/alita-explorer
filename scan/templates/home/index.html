@@ -500,7 +500,8 @@
       </div>
     </div>
   </div>
-  <script src="https://code.jquery.com/jquery-3.5.1.min.js"></script>
+{#  <script src="https://code.jquery.com/jquery-3.5.1.min.js"></script>#}
+  <script src='https://cdnjs.cloudflare.com/ajax/libs/jquery/3.5.1/jquery.min.js'></script>
 <script>
   let $alignIrem=$("#activePeers");
   let _data=null;
@@ -810,24 +811,12 @@
         backgroundColor: 'transparent',
         color: 'rgba(120, 130, 140, .1)',
         borderColor: 'transparent',
-        scaleColors: ["#eff0f1", "#327fdb"],
+        scaleColors: ["#d2e1f3", "#206bc4"],
         normalizeFunction: 'polynomial',
-        // values:(chart_data ={{online_peers_data}}),
-        values: ({% if online_peers_data %}{{ online_peers_data|safe }}{% endif %}),
-        /* values: (chart_data = {
-          %
-          if online_peers_data %
-        } {
-          {
-            online_peers_data
-          }
-        } {
-          %
-          endif %
-        }), */
+        values: (chart_data = {% if online_peers_data %} {{ online_peers_data }} {% endif %}),
         onLabelShow: function (event, label, code) {
           if (chart_data[code] > 0) {
-            label.append(': <strong>' + values.chart_data[code] + '</strong>');
+            label.append(': <strong>' + chart_data[code] + '</strong>');
           }
         },
       });

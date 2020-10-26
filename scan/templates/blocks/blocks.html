@@ -14,7 +14,7 @@
 
 {% block content %}
 
-  <h5 class="p-2">Blocks
+  <h5 class="p-2" style="margin-top: 15px">Blocks
     {% if 'm' in request.GET %}
       <small class="text-muted">For miner #<a href="{% url 'address-detail' request.GET.m %}">{{ request.GET.m }}</a></small>
     {% endif %}

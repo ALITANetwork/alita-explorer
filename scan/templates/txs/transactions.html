@@ -14,7 +14,7 @@
 
 {% block content %}
 
-  <h5 class="p-2">Transactions
+  <h5 class="p-2" style="margin-top: 15px;">Transactions
     {% if 'block' in request.GET %}
       <small class="text-muted">For block #<a href="{% url 'block-detail' request.GET.block %}">{{ request.GET.block }}</a></small>
     {% elif 'a' in request.GET %}

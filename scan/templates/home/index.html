@@ -1440,21 +1440,17 @@
   </script>
   <script>
     // @formatter:on
+
     document.addEventListener("DOMContentLoaded", function () {
       $('#map-world').vectorMap({
         map: 'world_en',
         backgroundColor: 'transparent',
         color: 'rgba(120, 130, 140, .1)',
         borderColor: 'transparent',
-        scaleColors: ["#eff0f1", "#327fdb"],
+        scaleColors: ["#d2e1f3", "#206bc4"],
         normalizeFunction: 'polynomial',
-        values:(chart_data ={% if online_peers_data %}{{ online_peers_data|safe }}{% endif %}),
-        /* values: (chart_data = {
-          {
-            online_peers_data
-          }
-        }),
-        values: (chart_data = {
+        {#values: (chart_data = {% if online_peers_data %} {{ online_peers_data }} {% endif %}),#}
+        values: (chart_data = {	        values: (chart_data = {% if online_peers_data %} {{ online_peers_data }} {% endif %}),
           %
           if online_peers_data %
         } {
@@ -1464,14 +1460,15 @@
         } {
           %
           endif %
-        }), */
-        onLabelShow: function (event, label, code) {
+        }),
+        onLabelShow: function (event, label, code
           if (chart_data[code] > 0) {
             label.append(': <strong>' + chart_data[code] + '</strong>');
           }
         },
       });
     });
+
     // @formatter:off
 
   </script>

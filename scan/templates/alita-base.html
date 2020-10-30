@@ -870,18 +870,19 @@
         borderColor: 'transparent',
         scaleColors: ["#d2e1f3", "#206bc4"],
         normalizeFunction: 'polynomial',
-        values: (chart_data = {
-        %
-        if online_peers_data %
+        {#values: (chart_data = {% if online_peers_data %} {{ online_peers_data }} {% endif %}),#}
+        values: (chart_data = {	        values: (chart_data = {% if online_peers_data %} {{ online_peers_data }} {% endif %}),
+          %
+          if online_peers_data %
         } {
-        {
-        online_peers_data
-        }
+          {
+            online_peers_data
+          }
         } {
-        %
-        endif %
+          %
+          endif %
         }),
-        onLabelShow: function (event, label, code) {
+        onLabelShow: function (event, label, code
           if (chart_data[code] > 0) {
             label.append(': <strong>' + chart_data[code] + '</strong>');
           }

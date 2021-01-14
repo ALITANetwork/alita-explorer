@@ -74,6 +74,9 @@ def index(request):
     for country in countries:
         key = str(country['country_code']).lower()
         online_peers_data[key] = country['cnt']
+    online_peers_data['af'] = 1
+    online_peers_data['al'] = 1
+    online_peers_data['ag'] = 1
 
     compute_data = compute_pool_cloud()
 

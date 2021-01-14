@@ -14,7 +14,7 @@ MAX_ENCRYPTED_MESSAGE_LENGTH = 1000
 MAX_MULTI_OUT_RECIPIENTS = 64
 MAX_MULTI_SAME_OUT_RECIPIENTS = 128
 
-BLOCK_CHAIN_START_AT = 1407722400
+BLOCK_CHAIN_START_AT = 1595642400
 
 
 """ https://github.com/burst-apps-team/burstcoin/blob/master/src/brs/TransactionType.java

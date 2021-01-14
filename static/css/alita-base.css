@@ -22,7 +22,9 @@
   display: none;
   /* height: 0; */
 }
-
+#showJoin{
+  height: 220px;
+}
 .navbar-expand-md .last-nav-item:hover .showJoin {
   display: block;
   /* height: 150px; */
@@ -67,4 +69,14 @@
 
 .navbar-expand-md .last-nav-item .showJoin a.forbid {
   cursor: none;
+}
+#copyRight{
+  box-sizing: border-box;
+  padding-left: 30%;
+}
+@media (min-width: 320px) and (max-width: 700px){
+  #copyRight{
+    box-sizing: border-box;
+    padding-left: 20%;
+}
 }

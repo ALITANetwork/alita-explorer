@@ -1,5 +1,7 @@
 # Alita Explorer
 
+Alita Explorer is the main dashboar of computing network. The front end is developed based on burst explorer, which adds information display to the computing network. The back-end developed an api service based on django in python.
+
 ## How to run
 
 `cp .env.default .env`
